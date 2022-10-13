@@ -30,19 +30,19 @@ export class GameMap extends GameObject {
         }
         return true;
     }
-    
-    check_die(cell){//判断是否撞到障碍
+
+    check_die(cell) {//判断是否撞到障碍
         for (const wall of this.walls) {
-            if(cell.c===wall.c&&cell.r===wall.r) return false;
+            if (cell.c === wall.c && cell.r === wall.r) return false;
         }
 
         for (const snake of this.snakes) {
-            let k=snake.cells.length;
-            if(!snake.check_add()){
+            let k = snake.cells.length;
+            if (!snake.check_add()) {
                 k--;
             }
             for (let i = 0; i < k; i++) {
-                if(snake.cells[i].x===cell.x&&snake.cells[i].y===cell.y){
+                if (snake.cells[i].x === cell.x && snake.cells[i].y === cell.y) {
                     return false;
                 }
             }
@@ -110,16 +110,16 @@ export class GameMap extends GameObject {
 
     listening_events() {
         this.ctx.canvas.focus();
-        const [snake0,snake1]=this.snakes;
-        this.ctx.canvas.addEventListener("keydown",e => {
-            if(e.key==="w") snake0.set_direction(0);
-            else if(e.key==="d") snake0.set_direction(1);
-            else if(e.key==="s") snake0.set_direction(2);
-            else if(e.key==="a") snake0.set_direction(3);
-            else if(e.key==="ArrowUp") snake1.set_direction(0);
-            else if(e.key==="ArrowRight") snake1.set_direction(1);
-            else if(e.key==="ArrowDown") snake1.set_direction(2);
-            else if(e.key==="ArrowLeft") snake1.set_direction(3);
+        const [snake0, snake1] = this.snakes;
+        this.ctx.canvas.addEventListener("keydown", e => {
+            if (e.key === "w") snake0.set_direction(0);
+            else if (e.key === "d") snake0.set_direction(1);
+            else if (e.key === "s") snake0.set_direction(2);
+            else if (e.key === "a") snake0.set_direction(3);
+            else if (e.key === "ArrowUp") snake1.set_direction(0);
+            else if (e.key === "ArrowRight") snake1.set_direction(1);
+            else if (e.key === "ArrowDown") snake1.set_direction(2);
+            else if (e.key === "ArrowLeft") snake1.set_direction(3);
 
         })
     }

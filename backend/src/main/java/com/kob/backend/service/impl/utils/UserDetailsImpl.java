@@ -1,10 +1,9 @@
-package com.kob.backend.service.impl.util;
+package com.kob.backend.service.impl.utils;
 
 import com.kob.backend.pojo.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

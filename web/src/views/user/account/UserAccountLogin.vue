@@ -1,5 +1,5 @@
 <template>
-    <ContentFiled>
+    <ContentFiled v-if="!$store.state.user.polling_info">
       <div class="row justify-content-md-center">
         <div class="col-3">
             <form @submit.prevent="login">
@@ -34,6 +34,25 @@ export default {
       let username=ref('');
       let password=ref('');
       let err=ref('');
+
+      const jwttoken=localStorage.getItem("jwttoken");
+      if(jwttoken){
+        store.commit("updateToken",jwttoken);
+        store.dispatch("getinfo",{
+          success(){
+            router.push({name:"home"});
+            store.commit("update_polling_info",false);
+          },
+          error(){
+            store.commit("update_polling_info",false);
+          }
+        })
+      }else{
+        store.commit("update_polling_info",false);
+      }
+
+
+
       const login=()=>{
         err.value="";
         store.dispatch("login",{
@@ -43,7 +62,6 @@ export default {
             store.dispatch("getinfo",{
               success(){
                 router.push( {name:'home'} );
-                console.log(store.state.user)
               }
             })
           },
@@ -57,7 +75,7 @@ export default {
         username,
         password,
         err,
-        login
+        login,
       }
 
     }

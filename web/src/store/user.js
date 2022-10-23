@@ -6,7 +6,8 @@ export default ({
         username:"",
         photo:"",
         token:"",
-        islogin:false
+        islogin:false,
+        polling_info:true,
     },
     mutations: {
         updateUser(state,user){
@@ -24,6 +25,9 @@ export default ({
             state.photo="";
             state.token="";
             state.islogin="";
+        },
+        update_polling_info(state,polling_info){
+            state.polling_info=polling_info;
         }
     },
     actions: {
@@ -37,6 +41,7 @@ export default ({
                 },
                 success(resp) {
                     if(resp.err==="success"){
+                        localStorage.setItem("jwttoken",resp.token);
                         context.commit("updateToken",resp.token);
                         data.success(resp);
                     }else{
@@ -75,6 +80,7 @@ export default ({
         },
 
         logout(context) {
+            localStorage.removeItem("jwttoken");
             context.commit("logout");
         }
 

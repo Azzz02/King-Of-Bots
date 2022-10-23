@@ -51,9 +51,9 @@ public class RegisterServiceImpl implements RegisterService {
             map.put("err","密码长度不能大于100");
             return map;
         }
-
-        if(password.equals(surepassword)){
+        if(!password.equals(surepassword)){
             map.put("err","两次输入密码不一致");
+            return map;
         }
 
         QueryWrapper<User> queryWrapper=new QueryWrapper<>();
